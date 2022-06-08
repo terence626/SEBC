@@ -1,0 +1,56 @@
+--SE BC Assignment 6
+  
+select count(*) from actors 
+union all 
+select count(*) from directors 
+union all 
+select count(*) from movies 
+union all 
+select count(*) from movie_revenues 
+union all 
+select count(*) from movies_actors 
+;
+
+
+--SE BC Assignment 6, B1
+select movie_name, release_date 
+  from movies
+  order by movie_name
+  ;
+
+----SE BC Assignment 6, B2
+select concat(first_name, ' ', last_name) as Director, nationality
+  from directors
+  where nationality = 'American';
+  
+--SE BC Assignment 6, B3
+select concat(first_name, ' ', last_name) as actor, date_of_birth
+  from actors
+  where date_of_birth > '1970-01-01';
+
+  
+--SE BC Assignment 6, B4
+select movie_name, movie_length, movie_lang
+  from movies
+  where movie_length > 90 and movie_lang='English';
+  
+
+--SE BC Assignment 6, C1
+select movie_name, movie_lang
+  from movies
+  where movie_lang in ('English', 'Spanish', 'Korean');
+  
+
+--SE BC Assignment 6, C2
+select concat_ws(' ', first_name, last_name) as actor, date_of_birth
+  from actors
+  where date_of_birth between '1940-01-01' and '1969-12-31' 
+  and last_name like 'M%';
+
+
+--SE BC Assignment 6, C3
+select concat_ws(' ', first_name, last_name) as director, date_of_birth, nationality
+  from directors
+  where nationality in ('British','French','German')
+  and date_of_birth between '1950-01-01' and '1980-12-31' ;
+

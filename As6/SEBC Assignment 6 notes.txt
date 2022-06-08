@@ -1,0 +1,338 @@
+select 
+ movie_name, 
+ release_date 
+ from movies;
+
+select 
+ first_name || ' ' || last_name as Name, 
+ nationality 
+ from directors 
+ where nationality='American' 
+ order by last_name, first_name;
+
+select first_name, last_name, date_of_birth as Birthdate 
+ from actors 
+ where date_of_birth > '1970-01-01' 
+ order by date_of_birth;
+
+select 
+ movie_name as Movie, 
+ movie_length as Length 
+ from movies 
+ where movie_length > 90 
+ order by movie_length;
+
+
+select count(international_takings) from movie_revenues;
+select count(domestic_takings) from movie_revenues;
+
+select * from movie_revenues;
+
+select count(nationality) from directors;
+select (nationality) from directors;
+
+select count(*) from directors where nationality='American';
+
+select distinct nationality from directors;
+
+select nationality, count(nationality) from directors group by (nationality);
+
+select nationality, date_of_birth, count(nationality) from directors group by nationality, date_of_birth;
+
+select nationality, date_of_birth, 
+ count(nationality) from directors 
+ where nationality in ('American', 'British','Spanish') AND 
+ date_of_birth between '1970-01-01' and '1980-01-01' 
+ Group by nationality, date_of_birth;
+
+
+select nationality, count(nationality) from directors 
+ where nationality in ('American', 'British','Spanish') AND 
+ between '1960-01-01' and '1990-01-01' and count(nationality)
+ Group by nationality, date_of_birth;
+
+
+SELECT  nationality,count(nationality) from directors
+group by nationality;
+
+SELECT  nationality, date_of_birth, 
+count(nationality) from directors
+group by nationality, date_of_birth;
+
+
+SELECT  nationality, count(nationality) from directors
+WHERE nationality in ('American','British','Chinese') AND 
+first_name between 'c' and 'y'
+group by nationality;
+
+
+//restricting search results to those countries with results between 3 and 15.
+SELECT  nationality, count(nationality) from directors
+ WHERE nationality in ('American','British','Chinese') AND 
+ first_name between 'c' and 'y' 
+ group by nationality 
+ having count(nationality) between 3 and 15;
+ 
+ 
+SELECT  nationality, count(nationality) from directors
+ WHERE nationality in ('American','British','Chinese') AND 
+ first_name between 'c' and 'y' 
+ group by nationality
+ HAVING count(nationality) between 4 and 10 or  count(nationality) <3;
+
+Select count(*) from actors 
+ where date_of_birth > '1970-01-01';
+
+select * from movie_revenues;
+
+select nationality, count(nationality) from directors 
+ WHERE nationality in ('American','British','Chinese') AND 
+ first_name between 'a' and 'y' 
+ group by nationality;
+
+select movie_lang, avg(movie_length) from movies 
+ Where movie_lang in ('English','Chinese')
+ group by movie_lang;
+
+select * from directors;
+
+join 
+select * from movies 
+where movie_lang<>'Chinese' and
+director_id;
+
+select * from directors;
+
+--JOIN hobbies ON persons.id=hobbies.person_id
+
+--2
+Select domestic_takings from movie_revenues 
+ where domestic_takings > 1
+ order by domestic_takings desc limit 1 ;
+
+Select domestic_takings from movie_revenues 
+ where domestic_takings > 0
+ order by domestic_takings asc limit 1 ;
+
+
+select domestic_takings, international_takings from movie_revenues;
+
+select domestic_takings+international_takings as sum 
+from movie_revenues;
+
+
+insert into directors
+ values
+ (1001,'John1','Smith1','1001-01-01,'British')
+ ;
+  
+select * from directors;
+
+--Left Join example
+select d.director_id, first_name, last_name, movie_name, movie_lang
+  from directors d
+  left join movies mo
+  on mo.director_id=d.director_id
+  where d.nationality in ('British','American')
+  ;
+
+  
+--Right Join example
+select d.director_id, first_name, last_name, movie_name, movie_lang
+  from movies mo
+  left join directors d
+  on mo.director_id=d.director_id
+  where d.nationality in ('British','American')
+  ;
+
+-- 1. Select the director's first and last names, the movie names and release dates for all Chinese, Korean, and Japanese movies.
+select first_name, last_name, movies.movie_name, movies.release_date, movies.movie_lang
+  from directors 
+  join movies
+  on directors.director_id = movies.director_id
+  where movie_lang in ('Chinese','Korean','Japanese')
+  ;
+  
+-- 2. Select the movie names, release datews, and international takins of all English language movies.
+--select first_name, last_name, movies.movie_name, movies.release_date, movies.movie_lang
+ from directors 
+ join movies
+ on directors.director_id = movies.director_id
+ where movie_lang in ('Chinese','Korean','Japanese')
+ ;
+  
+-- 3.  Select the movie names, domestic takins and international takings for all movies with either missing domestic takings or missing international takings and order the results by movie name.
+
+  
+
+-- 1. Use a left join to select the first and last names of all British directors and the names and age certificates of the movies that they directed.
+    
+-- 2. Count the number of movies that each director has directed
+
+select directors.first_name, directors.last_name, count(movies.movie_id)
+ from directors
+ left join movies
+ on directors.director_id=movies.director_id
+ group by first_name, last_name
+ order by last_name, first_name
+ ;
+  
+  
+-- joining more than 2 table (exercise)
+-- show director name, movie name, actor info, revenue info on the same record
+  
+Select directors.first_name, directors.last_name, domestic_takings, international_takings
+ from directors
+ join movies using(director_id)
+ join movie_revenues using(movie_id)
+ --where 
+ --order by
+ ;
+
+  
+Select directors.first_name, directors.last_name, actors.first_name, actors.last_name, domestic_takings, international_takings
+ from directors
+ join movies using(director_id)
+ join movie_revenues using(movie_id)
+ join movies_actors
+ using (movie_id)
+ join actors
+ using(actor_id)
+ --where 
+ --order by
+ ;
+
+-- 1.  Select the first and last names of all the actors who have starred in movies directed by Wes Anderson.
+select first_name,last_name
+ from actors
+ join movies_actors using ()
+ join movies using(director_id)
+  
+ where director.first_name='Wes' and director.last_name='Anderson'
+;
+  
+-- 2.  Which director has the highest total domestic takings?
+
+  
+-- 3.  Bonus - Select the first and last names of all the actors who have starred in movies directed by the director with the highest total domestic takings.
+  
+-- Practice: Find the person who is both director and actor
+  
+Select d.first_name, d.last_name
+ from directors d
+ join actors ac
+ on d.first_name=ac.first_name and d.last_name=ac.last_name
+ ;
+  
+  
+  
+ union all
+ select first_name, last Name
+
+-- 1.  Intersect the first name, last name and date of birth columns in the directors and actors tables.
+ 
+-- 2.  
+  
+-- Subqueries
+ 
+--Select Min(xxx)
+select first_name, last_name, date_of_birth
+ from directors
+ where date_of_birth = (select min(date_of_birth) from directors)
+ ;
+  
+  
+select d1.first_name, d1.last_name, d1.date_of_birth, d1.nationality
+ from directors d1
+ where d1.date_of_birth = (select min(date_of_birth) from directors d2
+		where d1.nationality=d2.nationality)
+  order by date_of_birth
+ ;
+  
+  
+  
+  
+-- 1.  Select the first name, last name, and date of birth for the oldest actors of each gender.
+
+-- 2.  Select the movie name, movie length and age certificate for movies with an above average length for their age certificate.
+
+select c1.movie_name, c1.movie_length, c1.age_certificate 
+ from movies c1
+ where c1.movie_length > (
+  select avg(c2.movie_length) from movies c2
+		where c2.age_certificate=c1.age_certificate)
+  order by age_certificate, movie_length
+  ;
+
+
+
+  
+--Philip practice
+  
+create table if not exists 
+Airshoot 
+(actor_id serial primary key, 
+ first_name varchar(31), 
+ last_name varchar(31) not null, 
+ gender char(1), 
+ date_of_birth date)
+ ;
+
+drop table Airshoot;
+
+  
+--SE BC Assignment 6
+  
+select count(*) from actors 
+union all 
+select count(*) from directors 
+union all 
+select count(*) from movies 
+union all 
+select count(*) from movie_revenues 
+union all 
+select count(*) from movies_actors 
+;
+
+
+--SE BC Assignment 6, B1
+select movie_name, release_date 
+  from movies
+  order by movie_name
+  ;
+
+----SE BC Assignment 6, B2
+select concat(first_name, ' ', last_name) as Director, nationality
+  from directors
+  where nationality = 'American';
+  
+--SE BC Assignment 6, B3
+select concat(first_name, ' ', last_name) as actor, date_of_birth
+  from actors
+  where date_of_birth > '1970-01-01';
+
+  
+--SE BC Assignment 6, B4
+select movie_name, movie_length, movie_lang
+  from movies
+  where movie_length > 90 and movie_lang='English';
+  
+
+--SE BC Assignment 6, C1
+select movie_name, movie_lang
+  from movies
+  where movie_lang in ('English', 'Spanish', 'Korean');
+  
+
+--SE BC Assignment 6, C2
+select concat_ws(' ', first_name, last_name) as actor, date_of_birth
+  from actors
+  where date_of_birth between '1940-01-01' and '1969-12-31' 
+  and last_name like 'M%';
+
+
+--SE BC Assignment 6, C3
+select concat_ws(' ', first_name, last_name) as director, date_of_birth, nationality
+  from directors
+  where nationality in ('British','French','German')
+  and date_of_birth between '1950-01-01' and '1980-12-31' ;
