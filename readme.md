@@ -1,3 +1,4 @@
 # https://terence626.github.io/SEBC/index.html
 
-first repo test
+This is my homework for QCC SEBC.
+(Queensborough Community College - Software Engineering Boot Camp)
