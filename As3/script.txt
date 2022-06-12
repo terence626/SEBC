@@ -1,0 +1,44 @@
+
+alert('hello');
+
+alert('Coffee');
+
+console.log(2 + 2);
+
+console.log('2 + 2');
+
+console.log('Hello Javascipt');
+
+console.log('Hello Javascipt', 1 + 2 + 3, 19191918273);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.querySelector('h1').textContent = 'Coffee is good!';
+
+document.querySelector('.firstbutton').addEventListener('click', function () {
+    document.querySelector('h1').textContent = 'PIZZA is ALSO good!';
+})
+
+

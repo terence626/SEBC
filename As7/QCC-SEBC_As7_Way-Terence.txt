@@ -1,0 +1,322 @@
+--SE BC Assignment 7 A1
+--Count the number of actors born after the 1st of January
+
+select count(actors) as number_of_actors
+  from actors
+  where date_of_birth > '1970-01-01'
+  ;
+
+
+
+
+
+--SE BC Assignment 7 A2
+--What was the highest and lowest domestic takings for a movie?
+
+(select movies.movie_name, domestic_takings
+	from movie_revenues
+	full join movies
+		on movies.movie_id=movie_revenues.movie_id
+	where domestic_takings is not null
+	order by domestic_takings
+ 	limit 1)
+	
+union all
+
+(select movies.movie_name, domestic_takings
+	from movie_revenues
+	full join movies
+		on movies.movie_id=movie_revenues.movie_id
+	where domestic_takings is not null
+	order by domestic_takings desc
+	limit 1) 
+	;
+
+
+
+
+
+
+
+
+
+-- experiments for As7 A2
+select movie_id, max(domestic_takings) from movie_revenues
+ where domestic_takings is not null
+ --and max(domestic_takings)
+ order by domestic_takings
+ ;
+
+select min(domestic_takings) as min_revenues, max(domestic_takings) as max_revenues from movie_revenues
+
+ full join movies
+ 	on movies.movie_id=movie_revenues.movie_id
+ where domestic_takings is not null
+ group by movies.movie_name;
+ 
+select movies.movie_name, domestic_takings
+  --in (min(domestic_takings), max(domestic_takings))
+  from movie_revenues
+  full join movies
+ 	on movies.movie_id=movie_revenues.movie_id
+  --where domestic_takings is not null 
+  having domestic_takings = min(domestic_takings)
+  order by domestic_takings
+  --group by movies.movie_name --, movie_revenues.domestic_takings
+  --having domestic_takings = min(domestic_takings) or domestic_takings = max(domestic_takings)
+  --having domestic_takings = min(domestic_takings)
+  
+  ;
+  
+  
+select movies.movie_name, domestic_takings
+  from movie_revenues
+    full join movies
+ 	on movies.movie_id=movie_revenues.movie_id
+  where domestic_takings is not null
+  group by movies.movie_name, domestic_takings
+  having domestic_takings <= min(domestic_takings) or domestic_takings >= max(domestic_takings) 
+  order by domestic_takings
+  ;
+
+
+
+
+
+--SE BC Assignment 7 A3
+--What is the sum total movie length for movies rated 15?
+
+select sum(movie_length) as total_movie_time
+  from movies
+  where age_certificate = '15'
+  ;
+  
+  
+  
+
+
+--SE BC Assignment 7 A4
+--How many Japanese directors are in the directors table?
+
+select count(directors) as number_of_japanese_directors
+  from directors
+  where nationality = 'Japanese'
+  ;
+
+
+--SE BC Assignment 7 A5
+--What is the average movie length for Chinese movies?
+
+select to_char(avg(movie_length), '9999.99') as average_runtime_for_chinese_movies
+  from movies
+  where movie_lang = 'Chinese'
+  ;
+
+
+
+--SE BC Assignment 7 B1
+--How many directors are there per nationality?
+
+select nationality, count(nationality) as number_of_directors
+  from directors
+  group by nationality
+  order by nationality
+  ;
+
+
+--SE BC Assignment 7 B2
+--What is the sum total movie length for each age certificate?
+
+select sum(movie_length) as total_runtime, 
+		movie_lang as language, 
+		age_certificate from movies
+	group by movie_lang, age_certificate
+	order by movie_lang, age_certificate
+	;
+
+
+
+
+
+
+--SE BC Assignment 7 B3
+--Return the movie languages which have a sum total movie length of over 500 minutes.
+
+select movie_lang as language, sum(movie_length) as total_runtime
+  from movies
+  group by movie_lang
+  having sum(movie_length) > 500
+  order by movie_lang
+  ;
+
+
+
+
+--SE BC Assignment 7 C1
+--Select the first and last names of all the actors who have starred in movies directed by Wes Anderson.
+
+select concat(actors.first_name, ' ', actors.last_name) as actor, 
+		movies.movie_name as movie, 
+		concat(directors.first_name, ' ', directors.last_name) as director
+	from movies
+	inner join directors
+		on directors.director_id = movies.director_id
+		and directors.first_name = 'Wes'
+		and directors.last_name  = 'Anderson'
+	inner join movies_actors
+		on movies.movie_id = movies_actors.movie_id
+	inner join actors
+		on actors.actor_id = movies_actors.actor_id
+	order by movie_name, actors.last_name, actors.first_name
+	;
+
+
+
+
+
+
+-- same as above, without the embellishments
+select actors.first_name, actors.last_name
+    from movies
+    inner join directors
+        on directors.director_id = movies.director_id
+        and directors.first_name = 'Wes'
+        and directors.last_name  = 'Anderson'
+    inner join movies_actors
+        on movies.movie_id = movies_actors.movie_id
+    inner join actors
+        on actors.actor_id = movies_actors.actor_id
+    ;
+
+
+
+
+
+--SE BC Assignment 7 C2
+--Select the first name, last name and date of birth for the oldest actors of each gender.
+
+(select concat(first_name, ' ', last_name) as eldest_actor, date_of_birth as birthdate, gender
+	from actors
+	where date_of_birth is not null and gender = 'M'
+	order by date_of_birth
+	limit 1)
+	
+union all
+
+(select concat(first_name, ' ', last_name) as actor, date_of_birth as birthdate, gender
+	from actors
+	where date_of_birth is not null and gender = 'F'
+	order by date_of_birth
+	limit 1)
+	;
+
+
+	
+
+
+
+--SE BC Assignment 7 C3
+--Select the movie name, movie length and age certificate for movies 
+--  with an above average length for their age certificate.
+
+SELECT mov1.movie_name as movies_longer_than_avg, 
+		mov1.age_certificate as age_cert, 
+		mov1.movie_length as length
+	FROM movies mov1
+	WHERE movie_length > 
+		(SELECT AVG(mov2.movie_length) FROM movies mov2
+		WHERE mov1.age_certificate = mov2.age_certificate)
+	ORDER BY mov1.age_certificate, mov1.movie_length, mov1.movie_name
+	;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select movie_name, movie_length, age_certificate
+	from movies
+	group by age_certificate, movie_length, movie_name
+	having movie_length > 100
+	order by age_certificate
+	;
+	
+select movie_name, age_certificate
+	from movies
+	group by age_certificate, movie_name, movie_length
+	having movie_length > avg(movie_length)
+	
+
+
+--experiments
+select concat(actors.first_name, ' ', actors.last_name), movies.movie_name, concat(directors.first_name, ' ', directors.last_name)
+	from movies
+	inner join directors
+		on directors.director_id = movies.director_id
+		and directors.first_name = 'Wes'
+		and directors.last_name  = 'Anderson'
+	inner join movies_actors
+		on movies.movie_id = movies_actors.movie_id
+	inner join actors
+		on actors.actor_id = movies_actors.actor_id
+	order by movie_name, actors.last_name, actors.last_name
+		;
+
+
+
+
+SELECT *
+	FROM movies
+	LEFT JOIN directors
+		ON directors.director_id = movies.director_id
+	;
+
+--create table if not exists 
+actors 
+(actor_id serial primary key, 
+ first_name varchar(31), 
+ last_name varchar(31) not null, 
+ gender char(1), 
+ date_of_birth date
+ --foreign key (actor_id)
+ --references movies_actors (actor_id)
+ --on delete cascade
+ )
+ ;
+ 
+select * from movies_actors;
+
+alter table movies_actors 
+ --alter column actor_id
+  add constraint unique_actor_id unique (actor_id);
+
+select * from movies_actors
+  order by movie_id
+  ;
+  
+  
