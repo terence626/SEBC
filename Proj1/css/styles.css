@@ -167,8 +167,8 @@ nav {
 }
 
 .bordered {
-    border-left: 1px solid rgb(51, 46, 46);
-    border-right: 1px solid 1px solid rgb(51, 46, 46);
+    border-left: 1px solid rgb(51, 48, 48);
+    border-right: 1px solid 1px solid rgb(51, 48, 48);
     padding-left: 5%;
     padding-right: 5%;
     width: 25%;
