@@ -22,12 +22,13 @@ right:0;
 
 opacity:0;
 pointer-events: none;
-transition: all 0.88s ease-out;
+transition: all 0.25s ease-out;
 }
 
 .mdlwindow:target{
 opacity: 1;
 pointer-events: all;
+font-size: 18px;
 }
 
 #mySecret2:target{
@@ -62,8 +63,9 @@ pointer-events: all;
 
 
 .item {
+  font-size: 16px;
   text-align: center;
-  width:45%;
+  width: 45%;
   float:left;
   background-color: lightgreen;
   margin-left: 3%;
@@ -72,4 +74,6 @@ pointer-events: all;
 
 .item p {
 height:50px;
+text-align: center;
+margin: auto;
 }
