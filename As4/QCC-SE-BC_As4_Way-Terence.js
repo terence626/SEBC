@@ -37,22 +37,3 @@ alert(celsTemp + ' C is '+ celToFa +" F.");
 
 let faToCel = tempToCel(fahrTemp);
 alert( fahrTemp + " F is "+ faToCel + " C.");
-
-
-//
-//
-// //Part C: prompt()
-//
-// user = prompt("Enter a number: ");
-// if(user == ""){
-//   console.log("Please enter a number!");
-// } else if( user == 10){
-//   console.log("You win 10 points.");
-// }else if(user == 8 ){
-//   console.log("You win 8 points.");
-// }else{
-//   console.log("NOT MATCHED!!");
-// }
-//
-//
-//
