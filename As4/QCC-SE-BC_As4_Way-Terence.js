@@ -1,5 +1,5 @@
 
-// Part A: BMI
+// Part A and Part C: BMI
 //BMI = WEIGHT / (HEIGHT*HEIGHT)
 
 document.write("QCC SEBC Assignment 4 by Terence Way<BR>");
@@ -17,13 +17,13 @@ if(lucasBMI >= peterBMI)
 
 
 
-// Part B: The temperature converter
+// Part B: Temperature conversion
 
 let celsTemp = 37;
 
 let fahrTemp = 108;
 
-function tempToFa (deg){
+function celsToFahr (deg){
  return (deg *9/5)+32;
 
 }
@@ -31,9 +31,9 @@ function tempToCel(deg){
  return (deg-32)*5/9;
 }
 
-let celToFa = tempToFa(celsTemp);
+let celToFa = celsToFahr(celsTemp);
 
 alert(celsTemp + ' C is '+ celToFa +" F.");
 
-let faToCel = tempToCel(fahrTemp);
+let faToCel = fahrToCels(fahrTemp);
 alert( fahrTemp + " F is "+ faToCel + " C.");
