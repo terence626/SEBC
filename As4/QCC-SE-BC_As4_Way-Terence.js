@@ -3,7 +3,7 @@
 //BMI = WEIGHT / (HEIGHT*HEIGHT)
 
 document.write("QCC SEBC Assignment 4 by Terence Way<BR>");
-document.write("Part A - BMI:<BR><BR><BR>");
+document.write("Part A & Part C - BMI:<BR><BR><BR>");
 
 let peterBMI = 92/(1.95*1.95);
 let lucasBMI = 78/(1.69*1.69);
