@@ -1,4 +1,3 @@
-
 // Parts A & C: BMI
 //BMI = WEIGHT / (HEIGHT*HEIGHT)
 
@@ -57,3 +56,6 @@ alert(fahrTemp2 + " F is "+ fToC2 + " C.");
 let fahrTemp3 = 102;
 let fToC3 = fahrToCels(fahrTemp3);
 alert(fahrTemp3 + " F is "+ fToC3 + " C.");
+
+document.write("<BR><BR>");
+document.write("© Copyright 2022 Terence Way");
