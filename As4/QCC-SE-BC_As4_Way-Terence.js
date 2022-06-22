@@ -20,63 +20,40 @@ if(lucasBMI >= peterBMI)
 
 // Parts B & D: Temperature conversion
 
-let celsTemp = 100;
+//C to F
+
 function celsToFahr (deg){
   return (deg *9/5)+32;
   }
 
+let celsTemp = 100;
 let cToF = celsToFahr(celsTemp);
 alert(celsTemp + ' C is '+ cToF +" F.");
 
-
 let celsTemp2 = 0;
-function celsToFahr (deg){
-  return (deg *9/5)+32;
-  }
-
 let cToF2 = celsToFahr(celsTemp2);
 alert(celsTemp2 + ' C is '+ cToF2 +" F.");
 
-
 let celsTemp3 = 10;
-function celsToFahr (deg){
-  return (deg *9/5)+32;
-  }
-
 let cToF3 = celsToFahr(celsTemp3);
 alert(celsTemp3 + ' C is '+ cToF3 +" F.");
 
 
 
+//F to C
 
-
-
-
-
-
-let fahrTemp = 32;
 function fahrToCels(deg){
   return (deg-32)*5/9;
   }
 
+let fahrTemp = 32;
 let fToC = fahrToCels(fahrTemp);
 alert(fahrTemp + " F is "+ fToC + " C.");
 
-
-
 let fahrTemp2 = 10;
-function fahrToCels(deg){
-  return (deg-32)*5/9;
-  }
-
 let fToC2 = fahrToCels(fahrTemp2);
 alert(fahrTemp2 + " F is "+ fToC2 + " C.");
 
-
 let fahrTemp3 = 102;
-function fahrToCels(deg){
-  return (deg-32)*5/9;
-  }
-
 let fToC3 = fahrToCels(fahrTemp3);
 alert(fahrTemp3 + " F is "+ fToC3 + " C.");
