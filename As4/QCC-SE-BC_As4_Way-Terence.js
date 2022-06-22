@@ -27,13 +27,12 @@ function celsToFahr (deg){
  return (deg *9/5)+32;
 
 }
-function tempToCel(deg){
+function fahrToCels(deg){
  return (deg-32)*5/9;
 }
 
-let celToFa = celsToFahr(celsTemp);
+let cToF = celsToFahr(celsTemp);
+alert(celsTemp + ' C is '+ cToF +" F.");
 
-alert(celsTemp + ' C is '+ celToFa +" F.");
-
-let faToCel = fahrToCels(fahrTemp);
-alert( fahrTemp + " F is "+ faToCel + " C.");
+let fToC = fahrToCels(fahrTemp);
+alert(fahrTemp + " F is "+ fToC + " C.");
