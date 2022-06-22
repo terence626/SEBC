@@ -19,14 +19,38 @@ if(lucasBMI >= peterBMI)
 
 // Parts B & D: Temperature conversion
 
-let celsTemp = 37;
-
+let celsTemp = 100;
 function celsToFahr (deg){
   return (deg *9/5)+32;
   }
 
 let cToF = celsToFahr(celsTemp);
 alert(celsTemp + ' C is '+ cToF +" F.");
+
+
+let celsTemp2 = 0;
+function celsToFahr (deg){
+  return (deg *9/5)+32;
+  }
+
+let cToF2 = celsToFahr(celsTemp2);
+alert(celsTemp2 + ' C is '+ cToF2 +" F.");
+
+
+let celsTemp3 = 10;
+function celsToFahr (deg){
+  return (deg *9/5)+32;
+  }
+
+let cToF3 = celsToFahr(celsTemp3);
+alert(celsTemp3 + ' C is '+ cToF3 +" F.");
+
+
+
+
+
+
+
 
 
 let fahrTemp = 32;
