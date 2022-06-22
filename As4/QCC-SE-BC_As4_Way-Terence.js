@@ -11,8 +11,8 @@ let lucasBMI = 78/(1.69*1.69);
 if(lucasBMI >= peterBMI)
   {
     document.write("Lucas's BMI of ("+ lucasBMI + ") is higher than Peter's BMI of ("+ peterBMI + ").");
-  }
-  else if(peterBMI > lucasBMI){
+    }
+else if(peterBMI > lucasBMI){
     document.write("Peter's BMI of ("+ peterBMI + ") is higher than Lucas' BMI of ("+ lucasBMI + ").");
     }
 
